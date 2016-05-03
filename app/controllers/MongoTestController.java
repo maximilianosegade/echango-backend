@@ -5,12 +5,12 @@ import java.nio.file.Paths;
 
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
-import org.jongo.MongoCursor;
+
 import com.mongodb.MongoClient;
 
 import models.User;
-import play.mvc.*;
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
 
 /**
  * Prueba de conexion a MongoDB
@@ -27,7 +27,7 @@ public class MongoTestController extends Controller {
     	}catch(Exception e){
 		}
     	mongoClient.close();
-        return ok(index.render("Your new application is ready."));
+        return TODO;
     }
 
 }
