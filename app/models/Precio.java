@@ -1,11 +1,12 @@
 package models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Precio {
-	public Float importe;
+	public BigDecimal importe;
 	public Date fecha;
     public Producto producto;
     public Comercio comercio;
