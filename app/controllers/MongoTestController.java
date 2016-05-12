@@ -23,7 +23,7 @@ public class MongoTestController extends Controller {
     	MongoCollection friends = jongo.getCollection("users");
     	User one = friends.findOne("{name: 'msegade'}").as(User.class);
     	try{
-    		Files.write(Paths.get("/home/ec2-user/test.txt"), one.getName().getBytes());
+    		Files.write(Paths.get("/home/ec2-user/test.txt"), one.username.getBytes());
     	}catch(Exception e){
 		}
     	mongoClient.close();

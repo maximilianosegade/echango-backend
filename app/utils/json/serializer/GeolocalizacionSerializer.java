@@ -15,8 +15,11 @@ public class GeolocalizacionSerializer extends JsonSerializer<Geolocalizacion> {
 	public void serialize(Geolocalizacion value, JsonGenerator jgen, SerializerProvider provider)
 			throws IOException, JsonProcessingException {
 		jgen.writeStartObject();
-        jgen.writeStringField("longitud", value.coordenadas.get(0).toString());
-        jgen.writeStringField("latitud", value.coordenadas.get(0).toString());
+		jgen.writeStringField("type", "Point");
+		jgen.writeArrayFieldStart("coordinates");
+		jgen.writeString(value.longitud);
+		jgen.writeString(value.latitud);
+		jgen.writeEndArray();
         jgen.writeEndObject();	
 	}
 
