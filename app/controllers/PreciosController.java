@@ -51,7 +51,7 @@ public class PreciosController extends Controller {
 //		}
     	
     	// TODO: Inyectar dependencia de Jongo.
-    	MongoClient mongoClient = new MongoClient("localhost",27017);
+    	MongoClient mongoClient = new MongoClient("ec2-52-39-199-128.us-west-2.compute.amazonaws.com");
     	@SuppressWarnings("deprecation")
 		Jongo jongo = new Jongo(mongoClient.getDB("echango"), 
 				new JacksonMapper.Builder()
@@ -65,7 +65,7 @@ public class PreciosController extends Controller {
     	MongoCollection comercios = jongo.getCollection("comercios");
     	try{
     		precios.insert(unPrecio);
-    		resultado = comercios.findOne().as(Comercio.class).id;
+    		resultado = comercios.findOne().as(Comercio.class)._id;
     	}catch(Exception e){
     		// TODO: Definir politica para manejar la excepcion.
     		// Se el va a mostrar algun mensaje al usuario en caso de error? Tiene sentido?
@@ -83,7 +83,7 @@ public class PreciosController extends Controller {
     	unPrecio.importe = new BigDecimal("1685").movePointLeft(2);
     	unPrecio.fecha = new Date();
     	unPrecio.comercio = new Comercio();
-    	unPrecio.comercio.id = "5734006362c3640afc481828";
+    	unPrecio.comercio._id = "5735087857249804c5ad91fc";
     	unPrecio.comercio.nombreEmpresa = "COTO";
     	unPrecio.comercio.geolocalizacion = new Geolocalizacion();
     	unPrecio.comercio.geolocalizacion.longitud="-58.395639";
@@ -92,9 +92,8 @@ public class PreciosController extends Controller {
     	unPrecio.producto.ean = "573401b762c3640afc481829";
     	unPrecio.producto.descripcion = "Sopa Knorr Quick";
     	unPrecio.producto.categorias = Arrays.asList(new String[]{"sopa","alimento"});
-    	unPrecio.registros = new HashMap<String, User>();
-    	unPrecio.registros.put("1313552212", new User());
-    	unPrecio.registros.get("1313552212").username = "msegade";
+    	unPrecio.usuario=new User();
+    	unPrecio.usuario._id="5735087857249804c5ad91fe";
 		return unPrecio;
 	}
 
