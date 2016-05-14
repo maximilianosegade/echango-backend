@@ -12,4 +12,14 @@ public class Comercio {
 	public String telefono;
 	public Direccion direccion;
 	public Geolocalizacion geolocalizacion;	
+	
+	@Override
+	public String toString() {
+		return "_id: {"					+_id						+"} "+
+				"empresa: {"			+nombreEmpresa				+"} "+
+				"tipo: {"				+tipo						+"} "+
+				"telefono: {"			+telefono					+"} "+
+				"direccion: {"			+(direccion!=null?direccion.toString():"null")				+"} "+
+				"geolocalizacion: {"	+(geolocalizacion!=null?geolocalizacion.toString():"null")	+"}";
+	}
 }

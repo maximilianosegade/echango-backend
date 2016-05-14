@@ -9,4 +9,11 @@ public class User {
 	
 	public String username;
 	public String password;
+	
+	@Override
+	public String toString() {
+		return "_id {"			+_id		+"} "+
+				"username: {"	+username	+"} "+
+				"password: {********}";
+	}
 }

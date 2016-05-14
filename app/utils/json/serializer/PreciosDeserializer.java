@@ -33,8 +33,8 @@ public class PreciosDeserializer extends JsonDeserializer<Precio> {
     	unPrecio.comercio = new Comercio();
     	unPrecio.comercio._id = node.get("comercio").asText();
     	unPrecio.comercio.geolocalizacion = new Geolocalizacion();
-    	unPrecio.comercio.geolocalizacion.longitud = node.get("ubicacion").get("coordinates").get(0).asText();
-    	unPrecio.comercio.geolocalizacion.latitud = node.get("ubicacion").get("coordinates").get(1).asText();
+    	unPrecio.comercio.geolocalizacion.longitud = new BigDecimal(node.get("ubicacion").get("coordinates").get(0).asText());
+    	unPrecio.comercio.geolocalizacion.latitud = new BigDecimal(node.get("ubicacion").get("coordinates").get(1).asText());
     	try {
 			unPrecio.fecha = new SimpleDateFormat(GMT_DATEFORMAT,Locale.US).parse(node.get("fecha").asText());
 		} catch (ParseException e) {

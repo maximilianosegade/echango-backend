@@ -42,27 +42,32 @@ public class PreciosController extends Controller {
     	Precio unPrecio = unPrecio();
     	precios.add( Arrays.asList(unPrecio));
     	
+    	// TODO: La distancia maxima deberia ser configurable.
     	DistanciaGeoEspacial distancia = new DistanciaGeoEspacial();
-    	distancia.longitud=1;
+    	distancia.longitud=Double.valueOf(1);
     	distancia.unidad=DistanciaGeoEspacial.Unidad.KM;
     	
     	String respuesta = "";
     	for (Precio precio: precios.preciosMasBajos(unPrecio, distancia)){
     		respuesta += precio + "\n";
     	}
-    	return ok(respuesta);
+    	return ok("Precios mas baratos que {"+ unPrecio.importe+"} relativos al punto {"+ 
+    				unPrecio.comercio.geolocalizacion.toString() + "} con un radio de {"+ 
+    				distancia + ":\n\n"+ respuesta);
     }
 
 	private static Precio unPrecio() {
 		Precio unPrecio = new Precio();
-    	unPrecio.importe = new BigDecimal("28.62");
+    	unPrecio.importe = new BigDecimal("40.00");
     	unPrecio.fecha = new Date();
     	unPrecio.comercio = new Comercio();
     	unPrecio.comercio._id = "5735087857249804c5ad91fc";
     	unPrecio.comercio.nombreEmpresa = "COTO";
     	unPrecio.comercio.geolocalizacion = new Geolocalizacion();
-    	unPrecio.comercio.geolocalizacion.longitud="-58.395639";
-    	unPrecio.comercio.geolocalizacion.latitud="-34.726888";
+    	unPrecio.comercio.geolocalizacion.longitud=new BigDecimal("-58424407").movePointLeft(6);
+    	unPrecio.comercio.geolocalizacion.latitud=new BigDecimal("-34745614").movePointLeft(6);
+//    	unPrecio.comercio.geolocalizacion.longitud=new BigDecimal("-58425641").movePointLeft(6);
+//    	unPrecio.comercio.geolocalizacion.latitud=new BigDecimal("-34739663").movePointLeft(6);
     	unPrecio.producto = new Producto();
     	unPrecio.producto.ean = "573401b762c3640afc481829";
     	unPrecio.producto.descripcion = "Sopa Knorr Quick";

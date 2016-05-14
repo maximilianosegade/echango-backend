@@ -1,7 +1,15 @@
 package models;
 
+import java.math.BigDecimal;
+
 
 public class Geolocalizacion {
-	public String longitud;
-	public String latitud;
+	public BigDecimal longitud;
+	public BigDecimal latitud;
+	
+	@Override
+	public String toString() {
+		return "longitud: {" 	+(longitud!=null?longitud.toPlainString():"") 	+ "} "+
+				"latitud: {"	+(latitud!=null?latitud.toPlainString():"") 	+ "}";
+	}
 }

@@ -57,9 +57,17 @@ public class PreciosMongo implements Precios {
 	public List<Precio> preciosMasBajos(Precio unPrecio, DistanciaGeoEspacial radioCercania) {
 		MongoCursor<Precio> cursor = mongoClient.getCollection("precios").find(
 				"{" +
-					"importe: { $lt: # }"+
+					"importe: { $lt: # },"+
+					"ubicacion: {"+
+						"$geoWithin: {"+
+							"$centerSphere : [ [#,#] , # ]"+
+						"}"+
+                  	"}"+
 				"}",
-				unPrecio.importe.unscaledValue().intValue())
+				unPrecio.importe.unscaledValue().intValue(),
+				unPrecio.comercio.geolocalizacion.longitud.floatValue(),
+				unPrecio.comercio.geolocalizacion.latitud.floatValue(),
+				radioCercania.asRadians())
 				.as(Precio.class);
 		
 		List<Precio> preciosMasBajos = new ArrayList<Precio>();
@@ -70,9 +78,7 @@ public class PreciosMongo implements Precios {
 		}finally{
 			try {
 				cursor.close();
-			} catch (IOException e) { 
-				//TODO: Logger??? }
-			}
+			} catch (IOException e) {}
 		}
 		
 		return preciosMasBajos;

@@ -17,8 +17,8 @@ public class GeolocalizacionSerializer extends JsonSerializer<Geolocalizacion> {
 		jgen.writeStartObject();
 		jgen.writeStringField("type", "Point");
 		jgen.writeArrayFieldStart("coordinates");
-		jgen.writeString(value.longitud);
-		jgen.writeString(value.latitud);
+		jgen.writeNumber(value.longitud);
+		jgen.writeNumber(value.latitud);
 		jgen.writeEndArray();
         jgen.writeEndObject();	
 	}

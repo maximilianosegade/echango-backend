@@ -17,11 +17,13 @@ public class Precio {
     
     @Override
     public String toString() {
-    	return "_id: [" + _id + "] "+
-    			"importe: [" + importe.toPlainString() + "] "+
-    			"fecha: [" + fecha + "] "+
-    			"producto: [" + producto.ean + "] " + 
-    			"comercio: [" + comercio._id + "] " +
-    			"usuario: [" + usuario._id + "].";
+    	return "_id: {" 		+ _id 									+ "} "+
+    			"importe: {" 	+ (importe!=null?importe.toPlainString():"") 				+ "} "+
+    			"fecha: {" 		+ fecha 								+ "} "+
+    			"producto: {" 	+ (producto!=null?producto.toString():"") 					+ "} " + 
+    			"comercio: {" 	+ (comercio!=null?comercio.toString():"") 					+ "} " +
+    			"usuario: {" 	+ (usuario!=null?usuario.toString():"") 					+ "} " +
+				"ubicacion: {"	+ (comercio != null && comercio.geolocalizacion != null ? 
+										comercio.geolocalizacion.toString() : "") 			+ "}";
     }
 }
