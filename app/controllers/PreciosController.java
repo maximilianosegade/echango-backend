@@ -3,30 +3,34 @@ package controllers;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 
-import org.jongo.Jongo;
-import org.jongo.MongoCollection;
-import org.jongo.marshall.jackson.JacksonMapper;
+import javax.inject.Inject;
 
 import models.Comercio;
+import models.DistanciaGeoEspacial;
 import models.Geolocalizacion;
 import models.Precio;
 import models.Producto;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
-import utils.json.serializer.GeolocalizacionSerializer;
-import utils.json.serializer.PreciosSerializer;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.mongodb.MongoClient;
+import services.Precios;
 
 public class PreciosController extends Controller {
 
+	@Inject
+	private Precios precios;
+	
     public Result alta() {
-        return TODO;
+    	// TODO: Binding desde request.
+    	// Solo para test, hardcodeo un precio.
+    	Precio unPrecio = unPrecio();
+
+    	// TODO: Validar el precio ingresado.
+    	
+    	precios.add( Arrays.asList(new Precio[]{unPrecio}) );
+    	
+    	return ok("Se agrego: " + unPrecio);
     }
     
     public Result preciosMasBajos(){
@@ -36,51 +40,22 @@ public class PreciosController extends Controller {
     	
     	// Solo para test, hardcodeo un precio.
     	Precio unPrecio = unPrecio();
-
-//    	ObjectMapper mapper = new ObjectMapper().registerModule(
-//    			new SimpleModule()
-//    				.addSerializer(Precio.class, new PreciosSerializer())
-//    				.addSerializer(Geolocalizacion.class, new GeolocalizacionSerializer())
-//    			);
+    	precios.add( Arrays.asList(unPrecio));
     	
-    	String resultado = "";
-//    	try {
-//			resultado = mapper.writeValueAsString(unPrecio);
-//		} catch (Exception e) {
-//			return badRequest(e.getMessage());
-//		}
+    	DistanciaGeoEspacial distancia = new DistanciaGeoEspacial();
+    	distancia.longitud=1;
+    	distancia.unidad=DistanciaGeoEspacial.Unidad.KM;
     	
-    	// TODO: Inyectar dependencia de Jongo.
-    	MongoClient mongoClient = new MongoClient("ec2-52-39-199-128.us-west-2.compute.amazonaws.com");
-    	@SuppressWarnings("deprecation")
-		Jongo jongo = new Jongo(mongoClient.getDB("echango"), 
-				new JacksonMapper.Builder()
-			      .registerModule(new SimpleModule()
-			      	.addSerializer(Precio.class, new PreciosSerializer())
-			      	.addSerializer(Geolocalizacion.class, new GeolocalizacionSerializer()))
-			      .build()
-			      );
-    	
-    	MongoCollection precios = jongo.getCollection("precios");
-    	MongoCollection comercios = jongo.getCollection("comercios");
-    	try{
-    		precios.insert(unPrecio);
-    		resultado = comercios.findOne().as(Comercio.class)._id;
-    	}catch(Exception e){
-    		// TODO: Definir politica para manejar la excepcion.
-    		// Se el va a mostrar algun mensaje al usuario en caso de error? Tiene sentido?
-    		return badRequest(e.getMessage());
-    	}finally {
-    		// TODO: Analizar como maneja Mongo Java Driver / Jongo el cierre de recursos, pooling, thread safety, etc.
-    		mongoClient.close();
-		}
-    	
-    	return ok(resultado);
+    	String respuesta = "";
+    	for (Precio precio: precios.preciosMasBajos(unPrecio, distancia)){
+    		respuesta += precio + "\n";
+    	}
+    	return ok(respuesta);
     }
 
-	private Precio unPrecio() {
+	private static Precio unPrecio() {
 		Precio unPrecio = new Precio();
-    	unPrecio.importe = new BigDecimal("1685").movePointLeft(2);
+    	unPrecio.importe = new BigDecimal("28.62");
     	unPrecio.fecha = new Date();
     	unPrecio.comercio = new Comercio();
     	unPrecio.comercio._id = "5735087857249804c5ad91fc";
