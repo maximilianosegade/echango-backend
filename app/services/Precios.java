@@ -9,9 +9,14 @@ import models.Producto;
 
 public interface Precios {
 	/**
+	 * Obtengo un precio por ID
+	 */
+	Precio get(String id);
+	
+	/**
 	 * Agregar uno o mas precios.
 	 */
-	int add(List<Precio> precios);
+	List<String> add(List<Precio> precios);
 
 	/**
 	 * Bucar precios mas bajos que el solicitado, dentro de un radio

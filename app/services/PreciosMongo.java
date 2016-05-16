@@ -11,6 +11,7 @@ import models.Geolocalizacion;
 import models.Precio;
 import models.Producto;
 
+import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCursor;
 import org.jongo.marshall.jackson.JacksonMapper;
@@ -43,14 +44,20 @@ public class PreciosMongo implements Precios {
 	}
 	
 	@Override
-	public int add(List<Precio> precios) {
-		int agregados = 0;
+	public Precio get(String id) {
+		return mongoClient.getCollection("precios").findOne(new ObjectId(id))
+				.as(Precio.class);
+	}
+	
+	@Override
+	public List<String> add(List<Precio> precios) {
+		List<String> idPreciosAgregados = new ArrayList<String>();
 		for (Precio unPrecio: precios){
 			mongoClient.getCollection("precios").save(unPrecio);
-			agregados ++;
+			idPreciosAgregados.add(unPrecio._id);
 		}
 		
-		return agregados;
+		return idPreciosAgregados;
 	}
 
 	@Override

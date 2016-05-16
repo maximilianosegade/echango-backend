@@ -11,8 +11,8 @@ GET     /message                    controllers.AsyncController.message
 # Mongo DB Test
 GET     /mongo                    controllers.MongoTestController.index
 # Precios
-GET     /precios/alta                    controllers.PreciosController.alta
-GET     /precios/precios_mas_bajos             controllers.PreciosController.preciosMasBajos
+POST    /precios/alta                    controllers.PreciosController.alta
+GET     /precios/precios_mas_bajos/:id             controllers.PreciosController.preciosMasBajos(id)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
