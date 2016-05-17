@@ -2,8 +2,11 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import models.DistanciaGeoEspacial;
 import models.Precio;
@@ -12,8 +15,6 @@ import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.Precios;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 public class PreciosController extends Controller {
 
@@ -30,7 +31,7 @@ public class PreciosController extends Controller {
 
     	// TODO: Validar el precio ingresado.
     	
-    	List<String> idPreciosAgregados = precios.add( preciosNuevos );
+    	Map<String, String> idPreciosAgregados = precios.add( preciosNuevos );
     	
     	return ok(Json.toJson(idPreciosAgregados));
     }

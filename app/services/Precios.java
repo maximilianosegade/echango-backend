@@ -1,6 +1,7 @@
 package services;
 
 import java.util.List;
+import java.util.Map;
 
 import models.DistanciaGeoEspacial;
 import models.Geolocalizacion;
@@ -16,7 +17,7 @@ public interface Precios {
 	/**
 	 * Agregar uno o mas precios.
 	 */
-	List<String> add(List<Precio> precios);
+	Map<String, String> add(List<Precio> precios);
 
 	/**
 	 * Bucar precios mas bajos que el solicitado, dentro de un radio

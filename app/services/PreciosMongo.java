@@ -2,7 +2,9 @@ package services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Singleton;
 
@@ -50,11 +52,11 @@ public class PreciosMongo implements Precios {
 	}
 	
 	@Override
-	public List<String> add(List<Precio> precios) {
-		List<String> idPreciosAgregados = new ArrayList<String>();
+	public Map<String, String> add(List<Precio> precios) {
+		Map<String, String> idPreciosAgregados = new HashMap<String, String>();
 		for (Precio unPrecio: precios){
 			mongoClient.getCollection("precios").save(unPrecio);
-			idPreciosAgregados.add(unPrecio._id);
+			idPreciosAgregados.put(unPrecio.producto.ean, unPrecio._id);
 		}
 		
 		return idPreciosAgregados;
