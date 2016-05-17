@@ -6,22 +6,22 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
-import models.DistanciaGeoEspacial;
-import models.Geolocalizacion;
-import models.Precio;
-import models.Producto;
-
 import org.bson.types.ObjectId;
+import org.joda.time.DateTime;
 import org.jongo.Jongo;
 import org.jongo.MongoCursor;
 import org.jongo.marshall.jackson.JacksonMapper;
 
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.mongodb.MongoClient;
+
+import models.DistanciaGeoEspacial;
+import models.Geolocalizacion;
+import models.Precio;
+import models.Producto;
 import utils.json.serializer.GeolocalizacionSerializer;
 import utils.json.serializer.PreciosDeserializer;
 import utils.json.serializer.PreciosSerializer;
-
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.mongodb.MongoClient;
 
 @Singleton
 public class PreciosMongo implements Precios {
@@ -30,7 +30,7 @@ public class PreciosMongo implements Precios {
 	
 	public PreciosMongo() {
 		//TODO: Parametrizar conexion a la DB.
-		String host = "localhost";
+		String host = "ec2-52-36-82-237.us-west-2.compute.amazonaws.com";
 		Integer port = 27017;
 		String dbName = "echango";
 		mongoClient = new Jongo(new MongoClient(host, port).getDB(dbName),
@@ -65,6 +65,8 @@ public class PreciosMongo implements Precios {
 		MongoCursor<Precio> cursor = mongoClient.getCollection("precios").find(
 				"{" +
 					"importe: { $lt: # },"+
+					"fecha: { $gt: # },"+
+					"ean: #,"+
 					"ubicacion: {"+
 						"$geoWithin: {"+
 							"$centerSphere : [ [#,#] , # ]"+
@@ -72,6 +74,10 @@ public class PreciosMongo implements Precios {
                   	"}"+
 				"}",
 				unPrecio.importe.unscaledValue().intValue(),
+				//TODO: Definir la ventana horaria de busqueda de precios mas bajos.
+				// Por el momento es desde este momento, un dia para atras.
+				DateTime.now().minusDays(1).toDate(),
+				unPrecio.producto.ean,
 				unPrecio.comercio.geolocalizacion.longitud.floatValue(),
 				unPrecio.comercio.geolocalizacion.latitud.floatValue(),
 				radioCercania.asRadians())
