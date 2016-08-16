@@ -1,0 +1,460 @@
+016001|2|undefined|Accesorios de Cocina
+016002|2|undefined|Accesorios de Limpieza
+002001|2|undefined|Aceites
+003001001|3|false|Aceites / Cremas / Jabones
+003001|2|undefined|Aceites / Cremas / Jabones
+002002|2|undefined|Aceitunas / Encurtidos
+002002001|3|false|Aceitunas Negras
+002002002|3|false|Aceitunas Rellenas
+002002003|3|false|Aceitunas Verdes
+002006001|3|false|Aceto
+002001001|3|false|Aerosol
+018006001|3|false|After Shave
+005001|2|undefined|Aguas
+005002|2|undefined|Aguas Saborizadas
+018003001|3|true|Alcohol
+014001001|3|false|Alfajores
+014001|2|undefined|Alfajores
+018003002|3|false|Algodón / Hisopos
+003002|2|undefined|Alimentación Infantil
+001|1|undefined|Alimentos Congelados
+001001001|3|false|Alimentos de Soja
+001001|2|undefined|Alimentos de Soja
+002|1|undefined|Almacén
+016003001|3|false|Ambientales
+004001001|3|false|Americano
+004001|2|undefined|Aperitivos
+016009001|3|false|Aprestos
+002003|2|undefined|Arroz
+006001001|3|false|Asado Novillo
+002007001|3|true|Atún
+002005001|3|false|Avena
+002005002|3|false|Azucarados
+002004001|3|true|Azúcar
+002004|2|undefined|Azúcar y Edulcorante
+016002001|3|false|Baldes
+012001002|3|false|Banana
+002005003|3|false|Barras
+013001001|3|false|Barras de Cereal
+013001|2|undefined|Barras de Cereal
+011001001|3|false|Batata
+012002005|3|false|Batata
+016007001|3|false|Baños
+003|1|undefined|Bebes
+015011001|3|true|Bebible
+015012001|3|true|Bebible
+004|1|undefined|Bebidas con Alcohol
+005|1|undefined|Bebidas sin Alcohol
+006001007|3|false|Bife de Chorizo Novillo
+006001008|3|false|Bife de Chorizo Ternera
+004007001|3|false|Bivarietal
+004009001|3|false|Bivarietal
+013004001|3|false|Bizcochos
+002019001|3|false|Bizcochuelos
+004002001|3|false|Blancas
+004002|2|undefined|Blancas
+002003001|3|true|Blanco
+015007001|3|true|Blandos
+015008001|3|true|Blandos
+014002001|3|false|Bocaditos
+014002|2|undefined|Bocaditos
+006001009|3|false|Bola de Lomo Novillo
+006001010|3|false|Bola de Lomo Ternera
+016002002|3|false|Bolsas de Residuos
+011003001|3|false|Bondiola
+004009002|3|false|Borgoña
+004003001|3|true|Botella
+016002003|3|false|Broches
+002015002|3|false|Budines / Bizcochuelos
+002015003|3|false|Budines / Otros
+004009003|3|false|Cabernet Sauvignon
+002012001|3|false|Cacao
+002012002|3|false|Café Capsulas
+002012003|3|true|Café Instantáneo
+002012004|3|true|Café Molido
+002022001|3|true|Caldos
+002001002|3|false|Canola
+014003001|3|false|Caramelos / Chupetines / Chicles
+014003|2|undefined|Caramelos / Chupetines / Chicles
+010|1|undefined|Carne
+006|1|undefined|Carne
+006001013|3|false|Carne Picada Novillo
+006001014|3|false|Carne Picada Ternera
+012002007|3|false|Cebolla común
+018004001|3|false|Cepillos
+016002004|3|false|Ceras
+013004002|3|false|Cereal
+002005|2|undefined|Cereales
+003002001|3|false|Cereales Infantiles
+004003|2|undefined|Cervezas
+005009|2|undefined|Cervezas
+005009001|3|false|Cervezas sin Alcohol
+004007002|3|false|Chablis
+004004001|3|false|Champagne
+004007003|3|false|Chardonay
+002021001|3|false|Chizitos
+015003001|3|false|Chocolatada
+002005004|3|false|Chocolate
+013003001|3|true|Chocolate
+014004001|3|false|Chocolates / Tabletas
+014004|2|undefined|Chocolates / Tabletas
+003003001|3|false|Chupetes / Mamaderas
+003003|2|undefined|Chupetes / Mamaderas
+016007002|3|false|Cocina
+005004001|3|true|Cola
+018001003|3|false|Coloración
+015011002|3|true|Con Cereales / Frutas
+015012002|3|true|Con Cereales / Frutas
+005007001|3|false|Concentrados
+015003002|3|false|Condensada
+002006|2|undefined|Condimentos
+014005001|3|false|Confituras
+014005|2|undefined|Confituras
+002021002|3|false|Conos
+002007|2|undefined|Conservas
+018009|2|undefined|Cosméticos
+018001001|3|true|Crema Enjuague
+015001001|3|true|Crema de Leche
+015001|2|undefined|Crema de Leche
+018008|2|undefined|Cremas
+018006002|3|false|Cremas / Espumas
+018004002|3|true|Cremas Dentales
+016007003|3|false|Cremosos
+001002001|3|false|Croquetas
+001002|2|undefined|Croquetas
+006001015|3|false|Cuadrada Novillo
+006001016|3|false|Cuadrada Ternera
+006001017|3|false|Cuadril Novillo
+016004001|3|false|Cucarachas / Hormigas
+018001|2|undefined|Cuidado del Cabello
+002013001|3|true|Descremada
+015003003|3|true|Descremada
+015002001|3|false|Descremado
+016003|2|undefined|Desodorantes
+018002|2|undefined|Desodorantes
+002008001|3|true|Diet / Light
+015002|2|undefined|Dulce de Leche
+002008|2|undefined|Dulces
+011001|2|undefined|Dulces
+015007002|3|true|Duros
+015008002|3|true|Duros
+002004002|3|true|Edulcorante
+011002|2|undefined|Embutidos
+017002001|3|true|Empanadas
+001003001|3|false|Empanadas / Tartas
+001003|2|undefined|Empanadas / Tartas
+005007002|3|true|En polvo
+002002004|3|false|Encurtidos
+005003001|3|false|Energizantes
+005003|2|undefined|Energizantes
+018004003|3|false|Enjuague Bucal
+002013002|3|true|Entera
+015003004|3|true|Entera
+016002005|3|false|Escobas / Escobillones / Secadores
+002003002|3|false|Especiales
+015007003|3|false|Especiales
+015008003|3|false|Especiales
+011002001|3|false|Especialidades
+002006002|3|false|Especias
+016002006|3|false|Esponjas / Paños
+004004|2|undefined|Espumantes
+003004001|3|true|Extra Extra Grande
+003004002|3|true|Extra Grande
+018003|2|undefined|Farmacia
+018002001|3|true|Femeninos
+004001002|3|true|Fernet
+011|1|undefined|Fiambrería
+011003|2|undefined|Fiambres
+017001001|3|false|Fideos
+010003001|3|false|Filet de Merluza Despinado
+018006003|3|false|Filos
+002012005|3|false|Filtro de Café
+004007004|3|false|Fino Tipo Tetra
+004008001|3|false|Fino Tipo Tetra
+004009004|3|false|Fino Tipo Tetra
+015011003|3|true|Firme / Batido
+015012003|3|true|Firme / Batido
+002017001|3|false|Flanes
+015006001|3|true|Flanes
+004004002|3|false|Frizantes
+002005005|3|false|Frutal
+002007002|3|false|Frutas
+012001|2|undefined|Frutas
+002009001|3|false|Frutas Secas
+002009|2|undefined|Frutas Secas
+012|1|undefined|Frutas y Verduras
+016001001|3|false|Fósforos
+013|1|undefined|Galletitas
+013003|2|undefined|Galletitas Dulces Envasadas
+013004|2|undefined|Galletitas Saladas
+013002001|3|false|Galletitas de Arroz
+013002|2|undefined|Galletitas de Arroz
+005004|2|undefined|Gaseosas
+005001001|3|true|Gasificadas
+005002001|3|true|Gasificadas
+002017002|3|false|Gelatinas
+002001003|3|true|Girasol
+002001004|3|false|Girasol Alto Oleico
+018005001|3|false|Glicerinas
+014|1|undefined|Golosinas
+014006001|3|false|Gomitas
+014006|2|undefined|Gomitas
+003004003|3|true|Grande
+013004003|3|false|Grisines / Marineras
+002016001|3|true|Guiseros
+001004001|3|true|Hamburguesas
+001004|2|undefined|Hamburguesas
+002015004|3|false|Hamburguesas / Panchos
+002010|2|undefined|Harinas
+001005001|3|false|Helados
+001005|2|undefined|Helados
+005005001|3|false|Hierbas
+005005|2|undefined|Hierbas
+018004|2|undefined|Higiene Bucal
+013003002|3|false|Hojaldre
+002011001|3|true|Huevos
+002011|2|undefined|Huevos
+015003005|3|false|Infantil
+002012|2|undefined|Infusiones
+016003002|3|false|Inodoros
+016004|2|undefined|Insecticidas
+002003003|3|false|Integral
+002016002|3|false|Integrales / Otros
+005006001|3|false|Isotónicas
+005006|2|undefined|Isotónicas
+018005|2|undefined|Jabones
+016009004|3|true|Jabón Liquido
+018005002|3|false|Jabón de Tocador
+016009002|3|true|Jabón en Pan
+016009003|3|true|Jabón en Polvo
+011003002|3|true|Jamón Cocido
+002006003|3|false|Jugo de Limón
+005007|2|undefined|Jugos
+002016003|3|true|Largos
+004003002|3|true|Lata
+016005001|3|true|Lavandinas
+016005|2|undefined|Lavandinas
+016006001|3|true|Lavavajillas
+016006|2|undefined|Lavavajillas
+015003|2|undefined|Leche
+003002003|3|false|Leche Infantil
+002013|2|undefined|Leche en Polvo
+003002002|3|false|Leche en Polvo Bebes / Niños
+012002010|3|false|Lechuga
+002014001|3|false|Legumbres
+002014|2|undefined|Legumbres
+015004001|3|false|Levadura / Grasa
+015004|2|undefined|Levadura / Grasa
+004005001|3|false|Licores
+004005|2|undefined|Licores
+015006002|3|true|Light
+005004002|3|true|Lima Limón
+016007|2|undefined|Limpiadores
+016|1|undefined|Limpieza
+012001006|3|false|Limón
+005007003|3|false|Listos
+016002007|3|false|Lustramuebles
+015|1|undefined|Lácteos
+018005003|3|false|Líquidos
+002015005|3|false|Madalenas
+004008002|3|false|Malbec
+004009005|3|false|Malbec
+018008001|3|false|Manos / Cuerpo
+018009002|3|false|Manos / Uñas
+015005001|3|true|Manteca
+015005|2|undefined|Manteca / Margarina
+012001008|3|false|Manzana
+002021003|3|false|Maní
+018009001|3|false|Maquillaje
+015005002|3|false|Margarina
+018002002|3|true|Masculinos
+002012006|3|true|Mate Cocido
+002006004|3|true|Mayonesa
+002001005|3|true|Maíz
+002005006|3|false|Maíz
+002010001|3|true|Maíz
+003004004|3|true|Mediano
+011001002|3|false|Membrillo
+004008003|3|false|Merlot Rose
+004009006|3|false|Merlot Rose
+002008002|3|true|Mermelada
+002001006|3|true|Mezcla
+002005007|3|false|Miel
+002008003|3|false|Miel / Otros
+011003003|3|false|Mortadela / Salchichón
+016004002|3|false|Moscas / Mosquitos
+002006005|3|true|Mostaza
+002005008|3|false|Multicereal
+006001027|3|false|Nalga Novillo
+006001028|3|false|Nalga Ternera
+005004003|3|true|Naranja
+012001009|3|false|Naranja
+013003003|3|true|Obleas
+003001002|3|false|Oleo Calcáreo
+002001007|3|false|Oliva
+005004004|3|false|Otras
+004007005|3|false|Otras cepas
+004008004|3|false|Otras cepas
+004009007|3|false|Otras cepas
+018009999|3|false|Otros
+002007003|3|false|Otros Pescados (no Atún)
+011003004|3|true|Paleta
+006001031|3|false|Paleta Novillo
+006001032|3|false|Paleta Ternera
+002021004|3|false|Palitos
+002015008|3|true|Pan Rallado
+002015006|3|true|Pan de Molde
+002015007|3|true|Pan francés
+002015|2|undefined|Panificados
+012002012|3|false|Papa Blanca
+012002013|3|false|Papa Negra
+001006001|3|false|Papas
+001006|2|undefined|Papas
+002021005|3|false|Papas fritas
+016008002|3|true|Papel Higiénico
+016008|2|undefined|Papeles
+018006|2|undefined|Para Afeitarse
+016003003|3|false|Para telas
+017001|2|undefined|Pastas
+002016|2|undefined|Pastas
+017|1|undefined|Pastas y Tapas
+010004001|3|false|Pata / Muslo
+011003005|3|true|Pate
+003004|2|undefined|Pañales
+018003003|3|false|Pañales para adultos
+016008001|3|false|Pañuelos
+013003004|3|false|Pepas
+003004005|3|true|Pequeño
+018|1|undefined|Perfumería y Cuidado Personal
+018010001|3|false|Perfumes / Fragancias
+018010|2|undefined|Perfumes y Fragancias
+010003|2|undefined|Pescado
+010003999|3|false|Pescados
+011003006|3|true|Picadillo de Carne
+016007004|3|true|Pisos
+001007001|3|false|Pizzas
+001007|2|undefined|Pizzas
+002021006|3|false|Pochoclos
+016004003|3|false|Polillas / Pulgas / Garrapatas
+010004|2|undefined|Pollo
+010004002|3|false|Pollo Entero
+005004005|3|true|Pomelo
+002017003|3|false|Postres
+015006003|3|true|Postres
+002017|2|undefined|Postres
+015006|2|undefined|Postres / Flanes
+002010002|3|false|Premezcla
+018003004|3|false|Preservativos
+018007|2|undefined|Protección Femenina
+018007001|3|true|Protectores Diarios
+018003005|3|false|Protectores Mamarios
+018003006|3|false|Protectores Solares
+002018001|3|false|Puré Instantáneo
+002018|2|undefined|Puré Instantáneo
+015007|2|undefined|Quesos Enteros
+015008|2|undefined|Quesos Light
+015007004|3|true|Quesos Untables
+015008004|3|true|Quesos Untables
+015007005|3|true|Rallados
+015008005|3|true|Rallados
+001008|2|undefined|Rebozados
+001008002|3|false|Rebozados de Pescado
+001008001|3|false|Rebozados de Pollo
+003004006|3|true|Recién Nacido
+013004004|3|true|Regulares
+017001003|3|false|Rellenas
+002016004|3|false|Rellenas / Otras
+013003005|3|false|Rellenas / Otras
+016004004|3|true|Repelentes
+015002002|3|false|Repostero
+002019002|3|false|Repostería
+002019|2|undefined|Repostería
+015009001|3|false|Ricota
+015009|2|undefined|Ricota
+006001037|3|false|Roast Beef Novillo
+016008003|3|true|Rollo de Cocina
+016009|2|undefined|Ropa
+018008002|3|false|Rostro
+015003007|3|false|Saborizada
+002006006|3|false|Saborizadores
+002022002|3|false|Saborizadores
+002006007|3|true|Sal
+011003007|3|false|Salame / Salamines
+011002002|3|true|Salchichas
+002006008|3|false|Salsa golf / Kétchup
+002006009|3|false|Salsas
+015010001|3|false|Salud Activa
+015010|2|undefined|Salud Activa
+004009008|3|false|Sangiovesse
+004007006|3|false|Sauvignon Blanc
+013003006|3|true|Secas
+015007006|3|true|Semiduros
+015008006|3|false|Semiduros
+002020001|3|false|Semillas
+002020|2|undefined|Semillas
+016008004|3|false|Servilletas
+018001002|3|true|Shampoo
+004006001|3|false|Sidras / Otros
+005010001|3|false|Sidras / Otros
+004006|2|undefined|Sidras / Otros
+005010|2|undefined|Sidras / Otros
+015007007|3|true|Sin Sal
+015008007|3|true|Sin Sal
+005001002|3|true|Sin gas
+005002002|3|true|Sin gas
+002021007|3|false|Snack mix
+013004005|3|false|Snacks
+002021|2|undefined|Snacks
+005008001|3|true|Soda
+005008|2|undefined|Soda
+005007004|3|false|Soja
+002022003|3|false|Sopas
+002022|2|undefined|Sopas / Caldos
+002016005|3|true|Soperos
+016009005|3|true|Suavizantes
+013003007|3|true|Surtidas
+004008005|3|false|Syrah
+004009009|3|false|Syrah
+002010003|3|false|Sémola / Otras
+018003007|3|false|Talcos Corporales
+018007002|3|true|Tampones
+017002|2|undefined|Tapas
+004007007|3|false|Tardío / Dulce
+017002002|3|true|Tartas
+002012007|3|true|Te
+004009010|3|false|Tempranillo
+018007003|3|true|Toallas Higiénicas
+003005001|3|false|Toallitas Húmedas
+003005|2|undefined|Toallitas Húmedas
+012002016|3|false|Tomate redondo
+002007004|3|true|Tomates / Salsas
+004007008|3|false|Torrontés
+002021008|3|false|Tortillas
+002015009|3|false|Tostadas
+013004006|3|false|Tostadas
+015002003|3|true|Tradicional
+016002008|3|false|Trapos
+002010004|3|true|Trigo
+014007001|3|false|Turrones
+014007|2|undefined|Turrones
+005004006|3|true|Tónica
+006001|2|undefined|Vacuna
+013003008|3|false|Vainillas
+001009001|3|false|Vegetales
+002007005|3|true|Vegetales
+001009|2|undefined|Vegetales
+016001002|3|false|Velas
+012002|2|undefined|Verduras
+004001003|3|false|Vermouth
+016007005|3|false|Vidrios / Multiuso
+002006010|3|true|Vinagre
+004007|2|undefined|Vino Blanco
+004008|2|undefined|Vino Rosado
+004009|2|undefined|Vino Tinto
+002012008|3|true|Yerba
+002012009|3|false|Yerbas Saborizadas
+015011|2|undefined|Yogurt Descremado
+015012|2|undefined|Yogurt Entero
+012002017|3|false|Zanahoria
+002015001|3|false|Árabe
+017001002|3|false|Ñoquis
