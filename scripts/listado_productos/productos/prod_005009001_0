@@ -1,0 +1,1 @@
+{"status": 200, "total": 1, "maxLimitPermitido": 100, "maxCantSucursalesPermitido": 50, "productos": [{"marca": "IGUANA", "id": "7792798000708", "precioMax": 14.0, "precioMin": 13.69, "nombre": "Cerveza Rubia x 930 Cc", "presentacion": "1000.0 cc", "cantSucursalesDisponible": 16}], "totalPagina": 1}

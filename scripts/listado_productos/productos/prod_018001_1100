@@ -1,0 +1,1 @@
+{"status": 200, "total": 1101, "maxLimitPermitido": 100, "maxCantSucursalesPermitido": 50, "productos": [{"marca": "JOHNSONS", "id": "7790010606080", "precioMax": 39.55, "precioMin": 39.55, "nombre": "Shampoo Johnsons Baby x 200 Ml", "presentacion": "200.0 ml", "cantSucursalesDisponible": 1}], "totalPagina": 1}
