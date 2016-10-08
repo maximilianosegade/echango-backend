@@ -1,4 +1,4 @@
-const comercios_db = 'http://ec2-52-38-235-81.us-west-2.compute.amazonaws.com/comercios'
+const comercios_db = 'https://webi.certant.com/echango/comercios'
 const http = require('https')
 
 var sucursales = [
