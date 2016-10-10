@@ -1,15 +1,17 @@
 // Script config.
-const filePathProductos = 'd:/play/echango-backend/scripts/carga_mongo/files/lista_productos.js'
-const id_suc = '12-1-56'
-const id_suc_interno = '93c2845f4015d10fe1a570a98f015f81'
-const delay = 10000
-const logOffset = 100
+const filePathProductos = './carga_mongo/files/lista_productos.js'
+const id_suc = ['12-1-56']
+const id_suc_interno = ['93c2845f4015d10fe1a570a98f015f81']
+const delay = 1000
+const delayOffset = 50
+const logOffset = 5
 const saveOffset = 500
 const pathArchivos = '.'
 const hostname = '8kdx6rx8h4.execute-api.us-east-1.amazonaws.com'
-const key = 'rHLavj6O8Q58x60Bkr9Gs7zZrCE1i9k54aIDxqhm'
-const precios_db = 'http://ec2-52-38-235-81.us-west-2.compute.amazonaws.com/comercios_precios_consulta'
-const id_productos = obtenerListaDeProductos()
+const key = 'mBurRHh5lEHTFkC11Its1zcQuE1Gn4N58SGwD135'
+const precios_db = 'https://webi.certant.com/echango/comercios_precios_consulta'
+//const id_productos = obtenerListaDeProductos()
+const id_productos = ['7790895000997','7790360026606','7790670050629','7790360026576','7790670050766','7790360026590','7790360966841','7790670050827']
 const headers = {
   // Este valor puede llegar a cambiar:
   'x-api-key': key,
@@ -24,47 +26,58 @@ const headers = {
 }
 // End config.
 
-const https = require('https')
+const http = require('https')
 
-var precios_por_comercio = {
-  _id: id_suc_interno,
-  precios: [],
-  no_disponibles: []
+function wait() {
+  return new Promise(function(resolve, reject){
+    setTimeout(resolve, delayOffset + delay * Math.random());
+  })
 }
 
-function obtenerPreciosPorProductoYComercio(ean){
-  var options = {
-    hostname: hostname,
-    port: 443,
-    path: '/dev/producto?limit=30&id_producto='+ ean +'&array_sucursales=' + id_suc,
-    method: 'GET',
-    headers: headers
-  }
+function obtenerPreciosPorProductoYComercio(ean, suc){
 
-  var req = https.request(options, (res) => {
+  return new Promise(function(resolve, reject){
 
-    res.on('data', (d) => {
-      var respData = JSON.parse(new Buffer(d).toString('ascii'))
-      try{
-        // Si obtengo el precio OK lo guardo.
-        var precio = respData.sucursales[0].preciosProducto.precioLista
-        precios_por_comercio.precios.push({
-          ean: ean,
-          precios: precio
+    var options = {
+      hostname: hostname,
+      path: '/dev/producto?limit=30&id_producto='+ ean +'&array_sucursales=' + suc,
+      headers: headers
+    }
+
+    var req = http.get(options, function(response) {
+        var body = ''
+
+        response.on('data', function(d) {
+            body += d
         })
-      } catch (err) {
-        // Si da error lo marco como no disponible en ese comercio.
-        precios_por_comercio.no_disponibles.push(ean)
-      }
 
-      // Si releve el ultimo producto entonces guardo lo relevado.
-      productos_relevados++
-      loguearProgreso(precios_por_comercio, productos_relevados)
-      guardarCopiaTemporal(precios_por_comercio, productos_relevados)
+        response.on('end', function() {
+          var parsed = body.toString()
+          var respData = JSON.parse(parsed)
+          try{
+            // Si obtengo el precio OK lo guardo.
+            var precio = respData.sucursales[0].preciosProducto.precioLista
+            resolve({
+              ean: ean,
+              precios: precio
+            })
+          } catch (err) {
+            // Si da error lo marco como no disponible en ese comercio.
+            reject(ean)
+          }
+
+        })
+
     })
 
+    req.on('error', (err) => {
+      reject(ean)
+    })
+
+    req.end()
+
   })
-  req.end()
+
 }
 
 /*
@@ -119,10 +132,44 @@ function loguearProgreso (precios_por_comercio, productos_relevados){
   }
 }
 
-// Itero por cada ean de producto, y obtengo su precio
-var productos_relevados = 0
-id_productos.forEach(function(prod){
-  setTimeout(function(){
-    obtenerPreciosPorProductoYComercio(prod.ean)
-  }, delay * Math.random() + 1000);
-})
+var precios_por_comercio = {
+  _id: id_suc_interno,
+  precios: [],
+  no_disponibles: []
+}
+
+for (i=0; i<id_suc.length; i++){
+
+  console.log('Se van a buscar los precios de la sucursal: ' + id_suc[i])
+
+  for (j=0; j<id_productos.length; j++){
+
+    buscarPreciosSucursal(id_productos[j], id_suc[i], j)
+
+  }
+
+}
+
+function buscarPreciosSucursal(ean, suc, idx){
+
+  wait().then(function(){
+    return obtenerPreciosPorProductoYComercio(ean, suc)
+  }).then(function(precio){
+    console.log('EAN: [' + ean +'] - SUC: [' + suc + '] => OK.')
+    logProgress(idx)
+    precios_por_comercio.precios.push(precio)
+  }).catch(function(err){
+    console.log('EAN: [' + ean +'] - SUC: [' + suc + '] => ERR (' + err + ').')
+    logProgress(idx)
+    precios_por_comercio.no_disponibles.push(err)
+  })
+}
+
+function logProgress(idx){
+  if (idx % logOffset == 0 || idx == id_productos.length){
+    console.log('=============================================================')
+    console.log('Relevado hasta el momento: ' + j)
+    console.log('No disponibles: ' + precios_por_comercio.no_disponibles.length)
+    console.log('=============================================================')
+  }
+}
