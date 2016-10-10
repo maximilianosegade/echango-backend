@@ -1,6 +1,25 @@
 const comercios_db = 'https://webi.certant.com/echango/comercios'
+const outputFile = './suc_dia.js'
+const writeDB = false
 const http = require('https')
+const hostname = '8kdx6rx8h4.execute-api.us-east-1.amazonaws.com'
+const key = 'mBurRHh5lEHTFkC11Its1zcQuE1Gn4N58SGwD135'
+//const id_productos = obtenerListaDeProductos()
+const headers = {
+  // Este valor puede llegar a cambiar:
+  'x-api-key': key,
+  // Estos valores son constantes!
+  'connection': 'keep-alive',
+  'accept': 'application/json, text/plain, */*',
+  'origin': 'https://www.preciosclaros.gob.ar',
+  'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36',
+  'referer': 'https://www.preciosclaros.gob.ar/',
+  'accept-encoding': 'gzip, deflate, sdch, br',
+  'accept-language': 'en-US,en;q=0.8,es;q=0.6,pt-BR;q=0.4,pt;q=0.2,pt-PT;q=0.2'
+}
 
+const EventEmitter = require('events');
+const emitter = new EventEmitter()
 var sucursales = [
 'av-cramer-4345/',
 'av-galvan-3460/',
@@ -336,7 +355,57 @@ var sucursales = [
 '20-de-septiembre-341/',
 'av-francisco-beiro-3146/',
 'andonaegui-2129/'
-];
+]
+
+function obtenerIdSucursal(comercio){
+
+  var options = {
+    hostname: hostname,
+    port: 443,
+    path: '/prod/sucursales?lat='+comercio.ubicacion.coordinates[0]+
+              '&lng='+comercio.ubicacion.coordinates[1]+'&limit=1',
+    method: 'GET',
+    headers: headers
+  }
+
+  var req = http.request(options, (res) => {
+    var data = ''
+
+    res.on('data', (d) =>{
+      data += d
+    })
+
+    res.on('end', () => {
+      var respData = JSON.parse(data.toString())
+
+      comercio._id = respData.id
+      comercio.id_cadena = '12'
+      comercio.id_sucursal = respData.sucursalId
+
+      allComercios.push(comercio)
+
+      //console.log(JSON.stringify(comercio))
+
+      if (writeDB){
+
+        db.put(comercio).then(function(resp){
+          console.log(suc + ' => OK. ' + resp.id)
+        }).catch(function(err){
+          console.log(suc + ' => ERR. ' + err)
+        })
+
+      }
+
+      procesados++
+      console.log(procesados)
+      if (procesados == sucursales.length)
+        emitter.emit('end')
+    })
+
+  })
+
+  req.end()
+}
 
 var procesados = 0
 var allComercios = []
@@ -344,7 +413,6 @@ var PouchDB = require('pouchdb')
 var db = new PouchDB(comercios_db)
 
 sucursales.forEach(function(suc){
-  procesados++
 
   return http.get({
       host: 'www.supermercadosdia.com.ar',
@@ -392,11 +460,7 @@ sucursales.forEach(function(suc){
             cadena: 'DIA'
           }
 
-          db.post(comercio).then(function(resp){
-            console.log(suc + ' => OK. ' + resp.id)
-          }).catch(function(err){
-            console.log(suc + ' => ERR. ' + err)
-          })
+          obtenerIdSucursal(comercio)
 
         }catch(err){
           console.log(err)
@@ -406,4 +470,12 @@ sucursales.forEach(function(suc){
 
   })
 
+})
+
+emitter.on('end', function(){
+  require('fs').writeFile(outputFile, JSON.stringify(allComercios), function(err, res){
+    if (err) console.log('Se guardo el archivo ERR. ' + err)
+
+    console.log('Se guardo el archivo OK.')
+  })
 })
