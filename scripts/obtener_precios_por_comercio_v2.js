@@ -1,5 +1,5 @@
 // Script config.
-const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
+const date = ''//new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
 const filePathProductos = 'carga_mongo/files/lista_productos.js'
 const copiarEnDB = false
 const id_suc = '12-1-56'
@@ -75,19 +75,18 @@ function guardarCopiaTemporal(precios_por_comercio, productos_relevados){
   if (productos_relevados % saveOffset == 0 || productos_relevados == id_productos.length)
     guardarPreciosComercioEnArchivo(precios_por_comercio)
 
-    if (copiarEnDB){
+  if (copiarEnDB){
 
-      var PouchDB = require('pouchdb')
-      var db = new PouchDB(precios_db)
-      db.put(precios_por_comercio).then(function(){
-        console.log('Se guardo en Couch exitosamente!')
-      }).catch(function(err){
-        console.log('Error al persistir en Couch: ' + err)
-      })
-
-    }
+    var PouchDB = require('pouchdb')
+    var db = new PouchDB(precios_db)
+    db.put(precios_por_comercio).then(function(){
+      console.log('Se guardo en Couch exitosamente!')
+    }).catch(function(err){
+      console.log('Error al persistir en Couch: ' + err)
+    })
 
   }
+
 }
 
 /*
