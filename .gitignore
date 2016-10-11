@@ -8,3 +8,4 @@ target
 /RUNNING_PID
 bin
 libexec
+node_modules
