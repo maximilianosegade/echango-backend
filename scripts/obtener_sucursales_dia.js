@@ -357,13 +357,18 @@ var sucursales = [
 'andonaegui-2129/'
 ]
 
-function obtenerIdSucursal(comercio){
+var procesados = 0
+var allComercios = []
+var PouchDB = require('pouchdb')
+var db = new PouchDB(comercios_db)
+
+function obtenerIdSucursal(com){
 
   var options = {
     hostname: hostname,
     port: 443,
-    path: '/prod/sucursales?lat='+comercio.ubicacion.coordinates[0]+
-              '&lng='+comercio.ubicacion.coordinates[1]+'&limit=1',
+    path: '/prod/sucursales?lat='+com.ubicacion.coordinates[0]+
+              '&lng='+com.ubicacion.coordinates[1]+'&limit=1',
     method: 'GET',
     headers: headers
   }
@@ -377,18 +382,19 @@ function obtenerIdSucursal(comercio){
 
     res.on('end', () => {
       var respData = JSON.parse(data.toString())
+      //console.log(respData)
+      console.log(respData.sucursales[0].id + ' - ' + respData.sucursales[0].sucursalId)
 
-      comercio._id = respData.id
-      comercio.id_cadena = '12'
-      comercio.id_sucursal = respData.sucursalId
+      com._id = respData.sucursales[0].id
+      com.id_cadena = '12'
+      com.id_sucursal = respData.sucursales[0].sucursalId
 
-      allComercios.push(comercio)
-
-      //console.log(JSON.stringify(comercio))
+      console.log(JSON.stringify(com))
+      allComercios.push(com)
 
       if (writeDB){
 
-        db.put(comercio).then(function(resp){
+        db.put(com).then(function(resp){
           console.log(suc + ' => OK. ' + resp.id)
         }).catch(function(err){
           console.log(suc + ' => ERR. ' + err)
@@ -407,68 +413,68 @@ function obtenerIdSucursal(comercio){
   req.end()
 }
 
-var procesados = 0
-var allComercios = []
-var PouchDB = require('pouchdb')
-var db = new PouchDB(comercios_db)
-
 sucursales.forEach(function(suc){
+  setTimeout(function(){
 
-  return http.get({
-      host: 'www.supermercadosdia.com.ar',
-      path: '/sucursales/' + suc
-  }, function(response) {
-      var body = ''
+    return http.get({
+        host: 'www.supermercadosdia.com.ar',
+        path: '/sucursales/' + suc
+    }, function(response) {
+        var body = ''
 
-      response.on('data', function(d) {
-          body += d
-      })
+        response.on('data', function(d) {
+            body += d
+        })
 
-      response.on('end', function() {
-        var parsed = body.toString()
+        response.on('end', function() {
+          var parsed = body.toString()
 
-        try{
+          try{
 
-          var regex = /\<h4\>Dirección\<\/h4\>[^<]*\<p class\=\"gray\"\>[^<]*\<strong\>([^<]+)\<\/strong\>[^<]*\<br\>([^<]+)\<br\>/
-          var direccion = parsed.match(regex)[1].trim()
-          var zona = parsed.match(regex)[2].trim().replace(/,.*$/, '')
+            var regex = /\<h4\>Dirección\<\/h4\>[^<]*\<p class\=\"gray\"\>[^<]*\<strong\>([^<]+)\<\/strong\>[^<]*\<br\>([^<]+)\<br\>/
+            var direccion = parsed.match(regex)[1].trim()
+            var zona = parsed.match(regex)[2].trim().replace(/,.*$/, '')
 
-          regex = /LatLng\(([-.0-9]+)\s*,\s*([-.0-9]+)\)/
-          var coords = [parsed.match(regex)[1], parsed.match(regex)[2]]
+            regex = /LatLng\(([-.0-9]+)\s*,\s*([-.0-9]+)\)/
+            var coords = [parsed.match(regex)[1], parsed.match(regex)[2]]
 
-          var comercio = {
-            direccion: direccion,
-            horario: [
-              "8:30 a 21:30",
-              "8:30 a 21:30",
-              "8:30 a 21:30",
-              "8:30 a 21:30",
-              "8:30 a 22:00",
-              "8:30 a 22:00",
-              "9:00 a 21:30"
-            ],
-            id_interno: direccion,
-            nombre: zona,
-            provincia: 'BUENOS AIRES',
-            telefonos: '',
-            tipo: '',
-            ubicacion: {
-              type: 'Point',
-              coordinates: [parseFloat(coords[0]), parseFloat(coords[1])]
-            },
-            zona: 'CAPITAL FEDERAL',
-            cadena: 'DIA'
+            var comercio = {
+
+                direccion: direccion,
+                horario: [
+                  "8:30 a 21:30",
+                  "8:30 a 21:30",
+                  "8:30 a 21:30",
+                  "8:30 a 21:30",
+                  "8:30 a 22:00",
+                  "8:30 a 22:00",
+                  "9:00 a 21:30"
+                ],
+                nombre: zona,
+                provincia: 'BUENOS AIRES',
+                telefonos: '',
+                tipo: '',
+                ubicacion: {
+                  type: 'Point',
+                  coordinates: [parseFloat(coords[0]), parseFloat(coords[1])]
+                },
+                zona: 'CAPITAL FEDERAL',
+                cadena: 'DIA'
+
+            }
+
+            obtenerIdSucursal(comercio)
+
+          }catch(err){
+            procesados++
+            console.log(err)
           }
 
-          obtenerIdSucursal(comercio)
-
-        }catch(err){
-          console.log(err)
-        }
+        })
 
       })
 
-  })
+  }, 30000 * Math.random() + 50)
 
 })
 
