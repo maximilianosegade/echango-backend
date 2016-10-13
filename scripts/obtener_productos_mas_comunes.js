@@ -1,6 +1,6 @@
 // Script config.
 const filePathProductos = 'carga_mongo/files/lista_productos.js'
-const delay = 10000
+const delay = 100
 const pathOutputArchivos = '.'
 const hostname = '8kdx6rx8h4.execute-api.us-east-1.amazonaws.com'
 const key = 'PkVRKmPu0k6O2F0Y9J78TaFekqe3mAAe3RWJ5Vaj'
@@ -23,13 +23,15 @@ const http = require('https')
 var relevados = 0
 var ranking = {}
 
-for (var i=1; i<=30; i++){
+for (var i=0; i<=30; i++){
     ranking[i] = []
 }
 
-id_productos.forEach(obtenerCantidadPorProducto)
+for (i=0; i<id_productos.length; i++){
+    obtenerCantidadPorProducto(id_productos[i], i)
+}
     
-function obtenerCantidadPorProducto(prod){
+function obtenerCantidadPorProducto(prod, idx){
   setTimeout(function(){
     
   var options = {
@@ -51,21 +53,27 @@ function obtenerCantidadPorProducto(prod){
     res.on('end', (d) => {
       var respData = JSON.parse(body.toString())
       try{
+        //console.log(respData.sucursalesConProducto)
         ranking[respData.sucursalesConProducto].push(prod.ean)
       } catch (err) {
         // Si da error lo marco como no disponible en ese comercio.
-        console.log('Error: ' + prod.ean)
+        console.log('Error: ' + prod.ean + ' - ' + err)
       }
     
         relevados++
-      if (relevados % 200 == 0 || relevados == id_productos.length){
-          console.log('Relevados: ' + relevados)
+      if (relevados % 500 == 0 || relevados == id_productos.length){
+          console.log('Relevados: ' + relevados + ' - ' + new Date())
           console.log('Cant suc disponible | Porcentaje acumulado')
-          for (var j=30; j>=1; j--){
+          for (var j=30; j>=0; j--){
               acumulado += ranking[j].length * 100 / relevados
               console.log(j + ' | ' + acumulado + '%')              
           }
           console.log('==================================')
+          
+          require('fs').writeFile(pathOutputArchivos + '/mas_comunes.js',               JSON.stringify(ranking), (err) =>{
+            if (err) throw err;
+            console.log('Se genero el archivo OK')
+            })
       }
     })
 
@@ -73,12 +81,12 @@ function obtenerCantidadPorProducto(prod){
   
   req.on('error', (err) => {
     relevados++
-    console.log('Error: ' + prod.ean)
+    console.log('Error: ' + prod.ean + ' - ' + err)
   })
   
   req.end()
   
-  }, 120000 * Math.random())
+  }, delay * idx)
   
 }
 
