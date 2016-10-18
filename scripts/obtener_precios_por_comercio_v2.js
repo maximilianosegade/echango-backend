@@ -1,15 +1,17 @@
 // Script config.
 const date = ''//new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
-const filePathProductos = 'carga_mongo/files/lista_productos.js'
-const copiarEnDB = false
-const id_suc = '12-1-56'
-const delay = 10000
+// const filePathProductos = 'carga_mongo/files/lista_productos.js'
+const filePathProductos = 'carga_mongo/files/lista_productos_mas_comunes.js'
+const copiarEnDB = true
+const id_suc = '10-3-580'
+const delay = 45000
 const logOffset = 100
 const saveOffset = 500
 const pathOutputArchivos = '.'
 const hostname = '8kdx6rx8h4.execute-api.us-east-1.amazonaws.com'
-const key = 'mBurRHh5lEHTFkC11Its1zcQuE1Gn4N58SGwD135'
-const precios_db = 'https://webi.certant.com/echango/sucursales'
+const key = 'PkVRKmPu0k6O2F0Y9J78TaFekqe3mAAe3RWJ5Vaj'
+const precios_db = 'https://webi.certant.com/echango/precios_por_comercio'
+// const id_productos = [{ean:'7790895000997'},{ean:'7790250015109'},{ean:'7790315000149'}]//obtenerListaDeProductos()
 const id_productos = obtenerListaDeProductos()
 const headers = {
   // Este valor puede llegar a cambiar:
@@ -28,9 +30,8 @@ const headers = {
 const https = require('https')
 
 var precios_por_comercio = {
-  _id: id_suc,
-  precios: [],
-  no_disponibles: []
+   _id: id_suc,
+   precios: {}
 }
 
 function obtenerPreciosPorProductoYComercio(ean){
@@ -43,19 +44,22 @@ function obtenerPreciosPorProductoYComercio(ean){
   }
 
   var req = https.request(options, (res) => {
-
+    var body = ''
+          
     res.on('data', (d) => {
-      var respData = JSON.parse(new Buffer(d).toString('ascii'))
+      body += d  
+    })
+    
+    res.on('end', (d) => {
+      var respData = JSON.parse(body.toString())
       try{
         // Si obtengo el precio OK lo guardo.
         var precio = respData.sucursales[0].preciosProducto.precioLista
-        precios_por_comercio.precios.push({
-          ean: ean,
-          precios: precio
-        })
+        precios_por_comercio.precios[ean] = precio
+
       } catch (err) {
         // Si da error lo marco como no disponible en ese comercio.
-        precios_por_comercio.no_disponibles.push(ean)
+        console.log(ean + ' -  No disponible.')
       }
 
       // Si releve el ultimo producto entonces guardo lo relevado.
@@ -75,14 +79,13 @@ function guardarCopiaTemporal(precios_por_comercio, productos_relevados){
   if (productos_relevados % saveOffset == 0 || productos_relevados == id_productos.length)
     guardarPreciosComercioEnArchivo(precios_por_comercio)
 
-  if (copiarEnDB){
-
+  if (copiarEnDB && productos_relevados == id_productos.length){
     var PouchDB = require('pouchdb')
     var db = new PouchDB(precios_db)
     db.put(precios_por_comercio).then(function(){
       console.log('Se guardo en Couch exitosamente!')
     }).catch(function(err){
-      console.log('Error al persistir en Couch: ' + err)
+      console.log('Error al persistir en Couch: ' + JSON.stringify(err))
     })
 
   }
@@ -115,7 +118,7 @@ function obtenerListaDeProductos(){
 function loguearProgreso (precios_por_comercio, productos_relevados){
   if (productos_relevados % logOffset == 0 || productos_relevados == id_productos.length){
     console.log('Relevado hasta el momento: ' + productos_relevados)
-    console.log('No disponibles: ' + precios_por_comercio.no_disponibles.length)
+    //console.log('No disponibles: ' + precios_por_comercio.no_disponibles.length)
     console.log('=============================================================')
   }
 }
